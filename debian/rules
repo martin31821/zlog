@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+PREFIX_LIB=$(shell pwd)/debian/libzlog1/usr
+PREFIX_DEV=$(shell pwd)/debian/libzlog-dev/usr
+LIBRARY_PATH=lib/$(DEB_HOST_GNU_TYPE)
+INCLUDE_PATH=include
+
+%:
+	dh $@ 
+override_dh_auto_build:
+	@echo $(DEB_HOST_GNU_TYPE)
+	make CC=$(DEB_HOST_GNU_TYPE)-gcc
+
+override_dh_auto_install:
+	@echo INSTALL FOR $(DEB_HOST_GNU_TYPE)
+	
+	make PREFIX=$(PREFIX_LIB) LIBRARY_PATH=$(LIBRARY_PATH) INCLUDE_PATH=$(INCLUDE_PATH) install
+	rm -r $(PREFIX_LIB)/$(INCLUDE_PATH)
+	rm $(PREFIX_LIB)/$(LIBRARY_PATH)/libzlog.a
+	make PREFIX=$(PREFIX_DEV) LIBRARY_PATH=$(LIBRARY_PATH) INCLUDE_PATH=$(INCLUDE_PATH) install
+	rm -r $(PREFIX_DEV)/$(LIBRARY_PATH)
+override_dh_auto_test:
+	@echo 'Skipping tests'
+	

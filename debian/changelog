@@ -1,0 +1,17 @@
+libzlog (1.2-3) xenial; urgency=medium
+
+  * Fix -dev lib couldn't be installed at the same time with the libzlog1 package.
+
+ -- Martin Koppehel <mkoppehel@embedded.enterprises> Fri, 18 Jan 2019 13:38:30 +0200
+
+libzlog (1.2-2) xenial; urgency=medium
+
+  * Fix build for cross-arch
+
+ -- Martin Koppehel <mkoppehel@embedded.enterprises>  Fri, 18 Jan 2019 11:38:20 +0200
+
+libzlog (1.2-1) xenial; urgency=medium
+
+  * Initial release
+
+ -- Martin Koppehel <mkoppehel@embedded.enterprises>  Mon, 14 May 2018 13:48:27 +0200

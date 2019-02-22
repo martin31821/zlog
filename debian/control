@@ -1,0 +1,25 @@
+Source: libzlog
+Section: libs
+Priority: optional
+Maintainer: Martin Koppehel <mkoppehel@embedded.enterprises>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.7
+
+Package: libzlog-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Priority: extra
+Depends: libzlog1 (= ${binary:Version}), ${misc:Depends}
+Description: pure c logging library
+ reliable, high performance, thread safe, pure c logging library
+
+Package: libzlog1
+Section: libs
+Architecture: any
+Priority: optional
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: pure c logging library
+ reliable, high performance, thread safe, pure c logging library
